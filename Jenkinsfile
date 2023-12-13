@@ -15,7 +15,7 @@ pipeline{
 		     stage ("install-httpd"){
 					agent{
 						label{
-								label "slave-1"
+								label "slave-2"
 								customWorkspace "/mnt/workingarea"
 						}
 					}

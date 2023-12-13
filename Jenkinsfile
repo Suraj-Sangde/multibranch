@@ -12,6 +12,8 @@ pipeline{
 						label{
 								label "slave-1"
 								customWorkspace "/mnt/workingarea"
+						}
+					}
 						steps{
 							sh "sudo yum install httpd -y"
 							sh " sudo service httpd restart"

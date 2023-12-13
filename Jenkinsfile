@@ -7,6 +7,11 @@ pipeline{
 			}
 		
 		stages{
+			stage ("clean-workspace") {
+						steps{
+							sh "sudo rm -rf *"
+						}
+						}
 		     stage ("install-httpd"){
 					agent{
 						label{
@@ -22,10 +27,20 @@ pipeline{
 							}
 			stage ("deploy-httpd") {
 						steps{
-								sh "sudo rm -rf *"
 								sh "sudo scp -i /mnt/ohio.pem /mnt/scm/index.html ec2-user@172.31.27.223:/mnt"
-								sh "sudo chmod -R 777 /var/www/html"
 							}
-						}	
+						}
+			 stage ("copy-index.html"){
+					agent{
+						label{
+								label "slave-1"
+								customWorkspace "/mnt/workingarea"
+						}
+					}
+						steps{
+							sh "sudo cp /mnt/index.html /var/www/html"
+							sh " sudo chmod -R 777 /var/www/html/*"
+							}
+							}
 					}
 				}

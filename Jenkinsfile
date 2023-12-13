@@ -23,7 +23,7 @@ pipeline{
 			stage ("deploy-httpd") {
 						steps{
 								sh "sudo rm -rf *"
-								sh "sudo scp -i /mnt/ohio.pem /mnt/scm/index.html 172.31.27.223@ec2-user:/mnt"
+								sh "sudo scp -i /mnt/ohio.pem /mnt/scm/index.html ec2-user@172.31.27.223:/mnt"
 								sh "sudo chmod -R 777 /var/www/html"
 							}
 						}	

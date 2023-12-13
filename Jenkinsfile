@@ -25,11 +25,6 @@ pipeline{
 							sh "sudo chmod -R 777 /mnt"
 							}
 							}
-			stage ("deploy-httpd") {
-						steps{
-								sh "sudo scp -i /mnt/ohio.pem /mnt/scm/index.html ec2-user@172.31.27.223:/mnt"
-							}
-						}
 			 stage ("copy-index.html"){
 					agent{
 						label{
@@ -38,7 +33,7 @@ pipeline{
 						}
 					}
 						steps{
-							sh "sudo cp /mnt/index.html /var/www/html"
+							sh "sudo cp /mnt/workingarea/index.html /var/www/html"
 							sh " sudo chmod -R 777 /var/www/html/*"
 							}
 							}
